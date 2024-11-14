@@ -1,5 +1,6 @@
-// tu_opinion.dart
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TuOpinionScreen extends StatefulWidget {
   const TuOpinionScreen({super.key});
@@ -13,6 +14,30 @@ class _TuOpinionScreenState extends State<TuOpinionScreen> {
   final TextEditingController _opinionController = TextEditingController();
   String _opinion = '';
 
+  // Variables para almacenar las preguntas cargadas del JSON
+  List<dynamic> usabilidad = [];
+  List<dynamic> contenido = [];
+  List<dynamic> compartir = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Cargar el archivo JSON al inicio
+    _loadJsonData();
+  }
+
+  // Cargar datos del archivo JSON
+  Future<void> _loadJsonData() async {
+    final String response = await rootBundle.loadString('assets/usabilidad.json');
+    final data = json.decode(response);
+
+    setState(() {
+      usabilidad = data['usabilidad'];
+      contenido = data['contenido'];
+      compartir = data['compartir'];
+    });
+  }
+
   @override
   void dispose() {
     _opinionController.dispose();
@@ -25,7 +50,6 @@ class _TuOpinionScreenState extends State<TuOpinionScreen> {
       _opinion = _opinionController.text;
     });
 
-    // Aquí puedes agregar lógica para guardar la opinión (por ejemplo, en una base de datos, almacenamiento local, etc.)
     // Mostrar una notificación o un mensaje de éxito
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Gracias por tu opinión!')),
@@ -51,6 +75,13 @@ class _TuOpinionScreenState extends State<TuOpinionScreen> {
               '¡Nos gustaría saber tu opinión sobre la aplicación!',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 20),
+            // Mostrar las preguntas cargadas del JSON
+            _buildQuestionsSection('Usabilidad', usabilidad),
+            const SizedBox(height: 20),
+            _buildQuestionsSection('Contenido', contenido),
+            const SizedBox(height: 20),
+            _buildQuestionsSection('Compartir', compartir),
             const SizedBox(height: 20),
             // Campo de texto para la opinión
             TextField(
@@ -86,6 +117,34 @@ class _TuOpinionScreenState extends State<TuOpinionScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  // Función para construir una sección de preguntas
+  Widget _buildQuestionsSection(String title, List<dynamic> questions) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 10),
+        ...questions.map((question) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(question['titulo'], style: const TextStyle(fontSize: 16)),
+                const SizedBox(height: 8),
+                Text('Mínimo: ${question['min']}', style: const TextStyle(fontSize: 14)),
+                Text('Máximo: ${question['max']}', style: const TextStyle(fontSize: 14)),
+              ],
+            ),
+          );
+        }).toList(),
+      ],
     );
   }
 }
