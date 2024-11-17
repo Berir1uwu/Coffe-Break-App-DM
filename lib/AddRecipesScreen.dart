@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:share_plus/share_plus.dart'; // Asegúrate de importar share_plus
-import 'Recipe.dart'; // Asegúrate de importar Recipe.dart
+import 'package:path/path.dart';
+import 'Recipe.dart';  // Asegúrate de importar la clase Recipe
+import 'DatabaseHelper.dart';  // Asegúrate de importar tu clase DatabaseHelper
 
 class AddRecipeScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -43,33 +44,36 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     });
   }
 
-  void _saveRecipe() {
+  void _saveRecipe() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      // Convertir las listas de ingredientes e instrucciones en cadenas separadas por comas
       final newRecipe = Recipe(
         name: _name,
-        image: _imagePath,
         description: _description,
         ingredients: _ingredients,
         instructions: _instructions,
+        image: _imagePath,
       );
-      print('Receta guardada: ${newRecipe.name}');
+
+      // Guardar la receta en la base de datos
+      int id = await DatabaseHelper.instance.insertRecipe(newRecipe);
+      
+      // Mostrar mensaje de éxito
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Receta guardada con ID: $id'),
+      ));
+
+      // Limpiar los campos después de guardar
+      setState(() {
+        _name = '';
+        _description = '';
+        _ingredients.clear();
+        _instructions.clear();
+        _imagePath = '';
+      });
     }
-  }
-
-  // Método para compartir la receta (solo texto)
-  void _shareRecipe() {
-    final String recipeDetails = '''
-Receta: $_name
-Descripción: $_description
-Ingredientes: ${_ingredients.join(', ')}
-Instrucciones: ${_instructions.join(', ')}
-
-¡Disfruta de la receta!
-    ''';
-
-    // Solo compartir el texto, sin archivos ni imágenes
-    Share.share(recipeDetails);
   }
 
   @override
@@ -100,6 +104,7 @@ Instrucciones: ${_instructions.join(', ')}
                   children: [
                     const Text('Nombre de la receta', style: TextStyle(fontWeight: FontWeight.bold)),
                     TextFormField(
+                      initialValue: _name,
                       decoration: const InputDecoration(hintText: 'Ejemplo: Espresso'),
                       onSaved: (value) => _name = value ?? '',
                       validator: (value) {
@@ -112,6 +117,7 @@ Instrucciones: ${_instructions.join(', ')}
                     const SizedBox(height: 20),
                     const Text('Descripción', style: TextStyle(fontWeight: FontWeight.bold)),
                     TextFormField(
+                      initialValue: _description,
                       decoration: const InputDecoration(hintText: 'Escribe una descripción'),
                       onSaved: (value) => _description = value ?? '',
                       validator: (value) {
@@ -125,13 +131,21 @@ Instrucciones: ${_instructions.join(', ')}
                     const Text('Ingredientes', style: TextStyle(fontWeight: FontWeight.bold)),
                     TextFormField(
                       decoration: const InputDecoration(hintText: 'Escribe un ingrediente'),
-                      onSaved: (value) => _ingredients.add(value ?? ''),
+                      onSaved: (value) {
+                        if (value != null && value.isNotEmpty) {
+                          _ingredients.add(value);
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
                     const Text('Instrucciones', style: TextStyle(fontWeight: FontWeight.bold)),
                     TextFormField(
                       decoration: const InputDecoration(hintText: 'Escribe una instrucción'),
-                      onSaved: (value) => _instructions.add(value ?? ''),
+                      onSaved: (value) {
+                        if (value != null && value.isNotEmpty) {
+                          _instructions.add(value);
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
                     _imagePath.isEmpty
@@ -146,12 +160,6 @@ Instrucciones: ${_instructions.join(', ')}
                       onPressed: _saveRecipe,
                       style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFCD5C5C)),
                       child: const Text('Agregar Receta', style: TextStyle(color: Colors.white)),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _shareRecipe, // Llamamos a _shareRecipe cuando se presiona
-                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6B4226)),
-                      child: const Text('Compartir Receta', style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),

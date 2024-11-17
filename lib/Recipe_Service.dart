@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'Recipe.dart'; // Aquí va la clase Recipe que definimos anteriormente
+import 'Recipe.dart'; 
 
 class RecipeService {
   // Cargar recetas desde el archivo JSON

@@ -1,0 +1,15 @@
+# Target labels
+ nuget-populate
+# Source files and their labels
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/nuget-populate
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/f2d3d959391983f94e31c207b5d6b345/nuget-populate.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/43003eeea637e6c3ccdf70136c7ed3f8/nuget-populate-complete.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-build.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-configure.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-copyfile.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-download.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-install.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-mkdir.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-patch.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-test.rule
+C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-update.rule

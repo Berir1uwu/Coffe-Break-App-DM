@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp\build\windows\x64\CMakeFiles\6c7f8b19e12f7477f884504da12c1418\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EEB29746-8767-3AA2-B284-B56A3951872E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,31 @@
+[
+    {
+      "name": "Espresso",
+      "description": "Un café fuerte y concentrado.",
+      "ingredients": ["Café molido", "Agua"],
+      "instructions": ["Muele el café", "Prepara el espresso"],
+      "image": "assets/icon/espresso.jpg"
+    },
+    {
+      "name": "Cappuccino",
+      "description": "Café con leche y espuma de leche.",
+      "ingredients": ["Café expreso", "Leche", "Espuma de leche"],
+      "instructions": ["Prepara el café", "Vaporiza la leche", "Sirve y agrega espuma"],
+      "image": "assets/icon/Cappuccino.jpg"
+    },
+    {
+      "name": "Latte",
+      "description": "Café suave con mucha leche.",
+      "ingredients": ["Café expreso", "Leche"],
+      "instructions": ["Prepara el café", "Vaporiza la leche", "Sirve"],
+      "image": "assets/icon/Latte.jpg"
+    },
+    {
+      "name": "Cold Brew",
+      "description": "Café preparado con agua fría.",
+      "ingredients": ["Café molido", "Agua fría"],
+      "instructions": ["Mezcla el café con agua", "Deja reposar 12 horas", "Filtra y sirve"],
+      "image": "assets/icon/ColdBrew.jpg"
+    }
+  ]
+  

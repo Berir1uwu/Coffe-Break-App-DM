@@ -1,0 +1,49 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/nuget-populate"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/f2d3d959391983f94e31c207b5d6b345/nuget-populate.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/43003eeea637e6c3ccdf70136c7ed3f8/nuget-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-build.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-copyfile.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-download.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-install.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-test.rule"
+		},
+		{
+			"file" : "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c6e98ebf2a29702620489d83444c11a9/nuget-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"nuget-populate"
+		],
+		"name" : "nuget-populate"
+	}
+}

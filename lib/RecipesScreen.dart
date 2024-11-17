@@ -1,10 +1,10 @@
 import 'package:coffebreakapp/RecipeCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'FavoritesProvider.dart'; // El provider donde tienes las recetas creadas por el usuario
-import 'Recipe_Service.dart'; // El servicio para cargar recetas desde JSON
-import 'recipe_detail_screen.dart'; // Pantalla de detalle de las recetas
-import 'Recipe.dart'; // La clase Recipe que hemos definido
+import 'FavoritesProvider.dart'; 
+import 'Recipe_Service.dart'; 
+import 'recipe_detail_screen.dart'; 
+import 'Recipe.dart'; 
 
 class RecipesScreen extends StatefulWidget {
   const RecipesScreen({super.key});
@@ -20,7 +20,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
   @override
   void initState() {
     super.initState();
-    _recipesFuture = RecipeService.loadRecipes(); // Cargar las recetas desde el JSON
+    _recipesFuture = RecipeService.loadRecipes(); 
   }
 
   @override
@@ -28,7 +28,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
     final createdRecipes = context.watch<FavoritesProvider>().createdRecipes;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 238, 229, 218), // Color de fondo
+      backgroundColor: const Color.fromARGB(255, 238, 229, 218), 
       appBar: AppBar(
         title: const Text('Recetas'),
         backgroundColor: const Color(0xFFCD5C5C),
@@ -57,13 +57,12 @@ class _RecipesScreenState extends State<RecipesScreen> {
                   image: recipe.image,
                 );
               }),
-              const Divider(), // Separador para diferenciar las recetas creadas por el usuario
-
+              const Divider(), 
               // Recetas creadas por el usuario
               ...createdRecipes.map((recipe) {
                 return RecipeCard(
-                  title: recipe, // Usamos el nombre de la receta creada por el usuario
-                  description: 'Receta personalizada', // Descripción predeterminada o personalizada
+                  title: recipe, 
+                  description: 'Receta personalizada', 
                   screen: RecipeDetailScreen(recipe: Recipe(name: recipe, description: 'Personalizada', ingredients: [], instructions: [], image: '')), image: '', // Aquí deberías crear una receta editada
                 );
               }),

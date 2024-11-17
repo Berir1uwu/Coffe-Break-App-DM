@@ -1,0 +1,28 @@
+^C:\SEMESTRE2-2024\DISPOSITIVOS MOVILES\COFFEBREAKAPP_2\COFFEBREAKAPP\BUILD\WINDOWS\X64\CMAKEFILES\992649C2A972F3D1A6AE47570A3E4B63\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\flutterfile\flutter "PROJECT_DIR=C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp" FLUTTER_ROOT=C:\flutterfile\flutter "FLUTTER_EPHEMERAL_DIR=C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp\windows\flutter\ephemeral" "PROJECT_DIR=C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp" "FLUTTER_TARGET=C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp\lib\main.dart" DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp\.dart_tool\package_config.json" C:/flutterfile/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\SEMESTRE2-2024\DISPOSITIVOS MOVILES\COFFEBREAKAPP_2\COFFEBREAKAPP\BUILD\WINDOWS\X64\CMAKEFILES\6DC68EDE68816EC1CCCF463A3D6CC414\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\SEMESTRE2-2024\DISPOSITIVOS MOVILES\COFFEBREAKAPP_2\COFFEBREAKAPP\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/windows" "-BC:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64" --check-stamp-file "C:/Semestre2-2024/Dispositivos moviles/CoffeBreakApp_2/coffebreakapp/build/windows/x64/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

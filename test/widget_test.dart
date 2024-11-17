@@ -17,7 +17,6 @@ class MockCameraDescription extends CameraDescription {
 void main() {
   testWidgets('Prueba de navegación y cámara en Mis recetas', (WidgetTester tester) async {
     // Crea un mock de la cámara
-    const mockCamera = MockCameraDescription();
 
     // Construye la app y pasa el mock de la cámara
     await tester.pumpWidget(const MaterialApp(

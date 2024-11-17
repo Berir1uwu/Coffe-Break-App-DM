@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // Importamos image_picker
-import 'package:permission_handler/permission_handler.dart'; // Importamos permission_handler
+import 'package:image_picker/image_picker.dart'; 
+import 'package:permission_handler/permission_handler.dart'; 
+import 'package:flutter_email_sender/flutter_email_sender.dart'; 
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -21,23 +22,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // Método para solicitar permisos automáticamente
   Future<void> _requestPermission() async {
-    // Verificamos si el permiso para acceder a fotos está concedido
     final status = await Permission.photos.request();
-    if (status.isGranted) {
-      print('Permiso concedido');
-    } else {
+    if (!status.isGranted) {
       print('Permiso denegado');
-      // Aquí puedes manejar lo que ocurre si el usuario deniega el permiso, 
-      // como mostrar un mensaje o dirigirlo a la configuración.
     }
   }
 
-  // Método para elegir una imagen
+  
   Future<void> _pickImage() async {
-    // Solicitamos permisos antes de abrir la galería
     await _requestPermission();
     if (await Permission.photos.isGranted) {
-      // Si el permiso fue concedido, abre la galería para seleccionar una imagen
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         setState(() {
@@ -47,15 +41,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  // Método para guardar los cambios (aunque por ahora solo se muestra un print)
-  void _saveChanges() {
+  // Método para enviar un correo notificando la actualización de perfil
+  Future<void> _sendEmailNotification() async {
+    final Email email = Email(
+      body: '''
+Hola $_name,
+
+Tus datos de perfil han sido actualizados correctamente:
+- Nombre: $_name
+- Email: $_email
+- Biografía: $_bio
+
+¡Gracias por mantener tu perfil actualizado!
+
+Atentamente, 
+El equipo de Coffee Break
+''',
+      subject: 'Actualización de Perfil - Coffee Break',
+      recipients: [_email],
+      isHTML: false,
+    );
+
+    try {
+      await FlutterEmailSender.send(email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Se ha enviado un correo de confirmación.')),
+      );
+    } catch (error) {
+      print('Error al enviar el correo: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error al enviar el correo.')),
+      );
+    }
+  }
+
+  // Método para guardar los cambios y enviar el correo
+  void _saveChanges() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // Aquí puedes guardar los datos editados
+
       print('Datos guardados:');
       print('Nombre: $_name');
       print('Email: $_email');
       print('Biografía: $_bio');
+
+      
+      await _sendEmailNotification();
     }
   }
 
@@ -71,10 +102,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Foto de perfil
+             
                 Center(
                   child: GestureDetector(
-                    onTap: _pickImage, // Llama a _pickImage al tocar la imagen
+                    onTap: _pickImage,
                     child: CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.grey[300],
@@ -89,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // Campo de nombre
+                
                 const Text('Nombre', style: TextStyle(fontSize: 18)),
                 TextFormField(
                   initialValue: _name,
@@ -103,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // Campo de email
+                
                 const Text('Email', style: TextStyle(fontSize: 18)),
                 TextFormField(
                   initialValue: _email,
@@ -112,12 +143,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     if (value == null || value.isEmpty) {
                       return 'El email es obligatorio';
                     }
+                    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                      return 'Ingresa un email válido';
+                    }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
 
-                // Campo de biografía
+                
                 const Text('Biografía', style: TextStyle(fontSize: 18)),
                 TextFormField(
                   initialValue: _bio,
@@ -132,7 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // Botón para guardar los cambios
+                
                 ElevatedButton(
                   onPressed: _saveChanges,
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFCD5C5C)),

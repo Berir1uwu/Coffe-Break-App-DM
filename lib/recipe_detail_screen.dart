@@ -7,7 +7,7 @@ class RecipeDetailScreen extends StatelessWidget {
 
   const RecipeDetailScreen({super.key, required this.recipe});
 
-  // Método para compartir la receta con un selector de aplicaciones
+  // Método para compartir la receta
   void _shareRecipe(BuildContext context) {
     final String content = '''
     ¡Mira esta receta que encontré en Coffee Break! ☕️
@@ -23,7 +23,6 @@ class RecipeDetailScreen extends StatelessWidget {
     ${recipe.instructions.map((instruction) => '- $instruction').join('\n')}
     ''';
 
-    // Llama al método share para abrir el selector de aplicaciones
     Share.share(content);
   }
 
@@ -34,10 +33,9 @@ class RecipeDetailScreen extends StatelessWidget {
         title: Text(recipe.name),
         backgroundColor: const Color(0xFFCD5C5C),
         actions: [
-          // Botón de compartir en la app bar
           IconButton(
             icon: const Icon(Icons.share),
-            onPressed: () => _shareRecipe(context), // Acción al presionar el botón
+            onPressed: () => _shareRecipe(context), // Llamada al método de compartir
           ),
         ],
       ),

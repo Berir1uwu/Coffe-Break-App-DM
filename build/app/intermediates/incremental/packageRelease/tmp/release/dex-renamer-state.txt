@@ -1,0 +1,4 @@
+#Sat Nov 16 23:03:27 CLST 2024
+base.0=C\:\\Semestre2-2024\\Dispositivos moviles\\CoffeBreakApp_2\\coffebreakapp\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

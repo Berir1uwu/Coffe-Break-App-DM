@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp\android\app"
+    name=":app"
+    type="APP"
+    maven="android:app:"
+    agpVersion="8.1.0"
+    buildFolder="C:\Semestre2-2024\Dispositivos moviles\CoffeBreakApp_2\coffebreakapp\build\app"
+    bootClassPath="C:\Users\javie\AppData\Local\Android\sdk\platforms\android-34\android.jar;C:\Users\javie\AppData\Local\Android\sdk\build-tools\33.0.1\core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-34">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

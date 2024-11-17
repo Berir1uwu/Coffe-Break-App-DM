@@ -6,7 +6,7 @@ class EmailSender {
     final Email email = Email(
       body: _buildEmailBody(),
       subject: 'Recuerda seguir explorando nuevas recetas',
-      recipients: ['example@example.com'], // Puedes cambiar esto por una lista de correos
+      recipients: ['example@example.com'], 
       isHTML: false,
     );
 
