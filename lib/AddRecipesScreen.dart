@@ -61,7 +61,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       int id = await DatabaseHelper.instance.insertRecipe(newRecipe);
       
       // Mostrar mensaje de éxito
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(SnackBar(
         content: Text('Receta guardada con ID: $id'),
       ));
 
