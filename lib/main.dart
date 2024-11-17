@@ -1,146 +1,152 @@
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'Recipe.dart'; // Asegúrate de importar Recipe.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'FavoritesProvider.dart';
+import 'ProfileScreen.dart';
+import 'RecipesScreen.dart';
+import 'AddRecipesScreen.dart';
+import 'TuOpinionScreen.dart';
 
-class AddRecipeScreen extends StatefulWidget {
-  final CameraDescription camera;
+void main() => runApp(const CoffeeBreakApp());
 
-  const AddRecipeScreen({super.key, required this.camera});
-
-  @override
-  _AddRecipeScreenState createState() => _AddRecipeScreenState();
-}
-
-class _AddRecipeScreenState extends State<AddRecipeScreen> {
-  late CameraController _cameraController;
-  late Future<void> _initializeCamera;
-  String _imagePath = '';
-  final _formKey = GlobalKey<FormState>();
-  String _name = '';
-  String _description = '';
-  final List<String> _ingredients = [];
-  final List<String> _instructions = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _cameraController = CameraController(widget.camera, ResolutionPreset.medium);
-    _initializeCamera = _cameraController.initialize();
-  }
-
-  @override
-  void dispose() {
-    _cameraController.dispose();
-    super.dispose();
-  }
-
-  void _takePicture() async {
-    final image = await _cameraController.takePicture();
-    setState(() {
-      _imagePath = image.path;
-    });
-  }
-
-  void _saveRecipe() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // Aquí puedes agregar la lógica para guardar la receta
-      final newRecipe = Recipe(
-        name: _name,
-        image: _imagePath,
-        description: _description,
-        ingredients: _ingredients,
-        instructions: _instructions,
-      );
-
-      // Aquí puedes hacer lo que necesites con la receta (por ejemplo, guardarla)
-      print('Receta guardada: ${newRecipe.name}');
-    }
-  }
+class CoffeeBreakApp extends StatelessWidget {
+  const CoffeeBreakApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FavoritesProvider()),
+      ],
+      child: const MaterialApp(
+        title: 'Coffee Break',
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(),
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final createdRecipes = context.watch<FavoritesProvider>().createdRecipes;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar Receta'),
+        title: const Text('Bienvenido a Coffee Break'),
         backgroundColor: const Color(0xFFCD5C5C),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
+        ],
       ),
-      body: FutureBuilder<void>(
-        future: _initializeCamera,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-
-          return Container(
-            color: const Color.fromARGB(255, 238, 229, 218), // Color de fondo
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Nombre de la receta', style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: 'Ejemplo: Espresso'),
-                      onSaved: (value) => _name = value ?? '',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'El nombre es obligatorio';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    const Text('Descripción', style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: 'Escribe una descripción'),
-                      onSaved: (value) => _description = value ?? '',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'La descripción es obligatoria';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    const Text('Ingredientes', style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: 'Escribe un ingrediente'),
-                      onSaved: (value) => _ingredients.add(value ?? ''),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text('Instrucciones', style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: 'Escribe una instrucción'),
-                      onSaved: (value) => _instructions.add(value ?? ''),
-                    ),
-                    const SizedBox(height: 20),
-                    _imagePath.isEmpty
-                        ? ElevatedButton(
-                            onPressed: _takePicture,
-                            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6B4226)),
-                            child: const Text('Tomar Foto', style: TextStyle(color: Colors.white)),
-                          )
-                        : Image.file(File(_imagePath)),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _saveRecipe,
-                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFCD5C5C)),
-                      child: const Text('Agregar Receta', style: TextStyle(color: Colors.white)),
-                    ),
-                  ],
-                ),
+      body: Container(
+        color: const Color.fromARGB(255, 238, 229, 218),
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Date un break con un exquisito café',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
-            ),
-          );
-        },
+              const SizedBox(height: 20),
+              const Text(
+                'Hazlo tú mismo!! Descubre el delicioso mundo del café.',
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RecipesScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(255, 85, 40, 15),
+                ),
+                child: const Text('Mi Barista'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  // Verifica si hay una cámara disponible antes de navegar
+                  final cameras = await availableCameras();
+                  if (cameras.isNotEmpty) {
+                    Navigator.push(
+                      // ignore: use_build_context_synchronously
+                      context,
+                      MaterialPageRoute(builder: (context) => AddRecipeScreen(camera: cameras.first)),
+                    );
+                  } else {
+                    print('No hay cámaras disponibles');
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(255, 85, 40, 15),
+                ),
+                child: const Text('Mis recetas'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const TuOpinionScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: const Color(0xFFCD5C5C),
+                ),
+                child: const Text('Tu Opinión'),
+              ),
+              const SizedBox(height: 40),
+              const Text(
+                'Últimas Recetas',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              createdRecipes.isNotEmpty
+                  ? Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: createdRecipes.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(createdRecipes[index]),
+                            leading: const Icon(Icons.local_cafe, color: Color(0xFFCD5C5C)),
+                          );
+                        },
+                      ),
+                    )
+                  : const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        'Aún no has creado ninguna receta. ¡Crea una para comenzar!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ),
+            ],
+          ),
+        ),
       ),
     );
   }

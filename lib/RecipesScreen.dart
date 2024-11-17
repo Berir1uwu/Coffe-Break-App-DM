@@ -1,4 +1,4 @@
-import 'package:coffebreak_app/RecipeCard.dart';
+import 'package:coffebreakapp/RecipeCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'FavoritesProvider.dart'; // El provider donde tienes las recetas creadas por el usuario

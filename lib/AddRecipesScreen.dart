@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:share_plus/share_plus.dart'; // Asegúrate de importar share_plus
 import 'Recipe.dart'; // Asegúrate de importar Recipe.dart
 
 class AddRecipeScreen extends StatefulWidget {
@@ -45,7 +46,6 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   void _saveRecipe() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // Aquí puedes agregar la lógica para guardar la receta
       final newRecipe = Recipe(
         name: _name,
         image: _imagePath,
@@ -53,10 +53,23 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         ingredients: _ingredients,
         instructions: _instructions,
       );
-
-      // Aquí puedes hacer lo que necesites con la receta (por ejemplo, guardarla)
       print('Receta guardada: ${newRecipe.name}');
     }
+  }
+
+  // Método para compartir la receta (solo texto)
+  void _shareRecipe() {
+    final String recipeDetails = '''
+Receta: $_name
+Descripción: $_description
+Ingredientes: ${_ingredients.join(', ')}
+Instrucciones: ${_instructions.join(', ')}
+
+¡Disfruta de la receta!
+    ''';
+
+    // Solo compartir el texto, sin archivos ni imágenes
+    Share.share(recipeDetails);
   }
 
   @override
@@ -133,6 +146,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       onPressed: _saveRecipe,
                       style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFCD5C5C)),
                       child: const Text('Agregar Receta', style: TextStyle(color: Colors.white)),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _shareRecipe, // Llamamos a _shareRecipe cuando se presiona
+                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6B4226)),
+                      child: const Text('Compartir Receta', style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),
