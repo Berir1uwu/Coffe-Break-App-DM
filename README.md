@@ -11,4 +11,4 @@
  los otros dos botones son el boton de ver recetas, que te lleva a la pantalla de recetas y el segundo boton es recetas favoritas, el cual lleva a las recetas favoritas del usuario.
 
  LINK VIDEO
-https://youtu.be/_FZLfqX_TBM
+https://youtu.be/nDVZp-SRBVY
